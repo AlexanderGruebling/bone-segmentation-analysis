@@ -1,0 +1,61 @@
+\documentclass[
+    a4paper,
+    % bibliography=totoc,
+    12pt,
+    parskip=half,
+]{scrarticle}
+
+\usepackage[T1]{fontenc}
+\usepackage{mlmodern}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[left=2cm,right=2cm]{geometry}
+% \usepackage[backend=biber, style=ieee, maxbibnames=6, minbibnames=1, maxcitenames=3, mincitenames=1]{biblatex}
+\usepackage{hyperref}
+% \hypersetup{
+%     colorlinks=true,
+%     citecolor=blue,
+% }
+\usepackage{subcaption}
+
+% Don't show subsubsection in TOC
+\setcounter{tocdepth}{2}
+
+\graphicspath{{images}}
+
+\title{Assignment 1 Report}
+\author{Grübling Alexander (12122371) \\ Preissegger Leo (12122526) \\  Seczer Tobias (12119044) \\ Shanto Md Aminul Islam (12310834) }
+\date{\today}
+
+\pagenumbering{gobble}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{titlepage}
+    \makeatletter
+    \centering
+    {\LARGE \bfseries \sffamily \@title \par}
+    \vspace{3\baselineskip}
+    {\large \bfseries \sffamily Group 10 \par}
+    {\large \@author \par}
+    {\large \@date \par}
+    \vspace{2\baselineskip}
+    \vfill{}
+    {\large
+    183.630 \\
+    Medical Image Processing UE \\
+    Semester: S2025 \par}
+    \makeatother
+\end{titlepage}
+
+\pagenumbering{arabic}
+
+\begin{enumerate}
+    \item Data Exploration
+    \item Feature Extraction and Edge Detection via Convolutions
+    \item Classification and Feature Selection
+\end{enumerate}
