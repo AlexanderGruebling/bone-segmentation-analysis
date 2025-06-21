@@ -27,7 +27,7 @@
 
 \graphicspath{{images}}
 
-\title{Assignment 1 Report}
+\title{Assignment 2 Report}
 \author{Grübling Alexander (12122371) \\ Preissegger Leo (12122526) \\  Seczer Tobias (12119044) \\ Shanto Md Aminul Islam (12310834) }
 \date{\today}
 
@@ -56,6 +56,19 @@
 
 \begin{enumerate}
     \item Data Exploration
+    \begin{enumerate}[label=\theenumi.\arabic*.]
+        \item Simple \texttt{plt.imshow} together with \texttt{plt.scatter}
+        \item Same as 1.1., but the aligned landmarks are centered around \((0, 0)\).
+        \item We only need to add the rotation matrix, which is very simple in 2D. In order to apply the rotation matrix,
+        we also need to reshape from \([x_1, \ldots , x_N, y_1, \ldots, y_N]\) to \([[x_1, \ldots, x_N], [y_1, \ldots, y_N]]\), then apply
+        the rotation matrix, and finally reshape the data back.
+        \item We used the PCA module of sklearn.
+        I tested the methods with angles and translations of which I knew how the output should look like and it was ok,
+        so the final output with our calculated transformations should also be correct.
+    \end{enumerate}
+
     \item Feature Extraction and Edge Detection via Convolutions
     \item Classification and Feature Selection
 \end{enumerate}
+
+\end{document}
