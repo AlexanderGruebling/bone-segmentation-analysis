@@ -93,7 +93,8 @@
             \item Now we use the U-Net to predict the segmentation masks for the test images.
             To do so, we first need to create a dataset and a dataloader for the test images, because the U-Net expects the images to be in a specific shape, that the dataloader automatically produces.
             In order to plot the predicted masks, we need to convert them back to numpy arrays and use the \texttt{plot\_prediction\_triplets(...)} function with the input images, the predicted masks, and the ground truth masks.
-            \item Compare the performance
+            \item For the random forest, we achieve a Dice Score of 0.236, a Precision of 0.139, and a Recall of 0.794.
+            The U-Net without augmentation achieves a Dice Score of 0.079, a Precision of 0.041, and a Recall of 1.0.
         \end{enumerate}
         \item Shape Particle Filters
     \end{enumerate}
