@@ -68,7 +68,35 @@
     \end{enumerate}
 
     \item Feature Extraction and Edge Detection via Convolutions
+    \begin{enumerate}[label=\theenumi.\arabic*.]
+        \item Edge Detection via Convolutions
+        \begin{enumerate}[label=\alph*)]
+            \item Here the two Prewitt kernels are defined as numpy arrays in the variable \texttt{PREWITT\_X} and \textitt{PREWITT\_Y}.
+            The values of the kernels are taken from the assignment sheet.
+            \item The convolution is done by first padding the image with one zero on each side to avoid problems with the borders.
+            Then we use a nested for loop to iterate over the image and apply the convolution by extracting  a \(3 \times 3\) patch of the image and multiplying it with the kernel.
+            \item Now three images are randomly sampled from the dataset using \\ \texttt{np.random.choice(len(images), size=3, replace=False)}.
+            After the images ares sampled, the convolution is applied to each of them using the function \texttt{conv2d(...)} defined in 2.1.b.
+            Finally, the convolved images are plotted.
+        \end{enumerate}
+        \item Image Feature Computation
+    \end{enumerate}
+
     \item Classification and Feature Selection
+    \begin{enumerate}[label=\theenumi.\arabic*.]
+        \item Data preparation
+        \item Random Forest (RF)
+        \item U-Net
+        \begin{enumerate}[label=\alph*)]
+            \item Train U-Net
+            \item Interpret U-Net
+            \item Now we use the U-Net to predict the segmentation masks for the test images.
+            To do so, we first need to create a dataset and a dataloader for the test images, because the U-Net expects the images to be in a specific shape, that the dataloader automatically produces.
+            In order to plot the predicted masks, we need to convert them back to numpy arrays and use the \texttt{plot\_prediction\_triplets(...)} function with the input images, the predicted masks, and the ground truth masks.
+            \item Compare the performance
+        \end{enumerate}
+        \item Shape Particle Filters
+    \end{enumerate}
 \end{enumerate}
 
 \end{document}
