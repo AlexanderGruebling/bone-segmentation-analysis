@@ -71,7 +71,7 @@
     \begin{enumerate}[label=\theenumi.\arabic*.]
         \item Edge Detection via Convolutions
         \begin{enumerate}[label=\alph*)]
-            \item Here the two Prewitt kernels are defined as numpy arrays in the variable \texttt{PREWITT\_X} and \textitt{PREWITT\_Y}.
+            \item Here the two Prewitt kernels are defined as numpy arrays in the variable \texttt{PREWITT\_X} and \texttt{PREWITT\_Y}.
             The values of the kernels are taken from the assignment sheet.
             \item The convolution is done by first padding the image with one zero on each side to avoid problems with the borders.
             Then we use a nested for loop to iterate over the image and apply the convolution by extracting  a \(3 \times 3\) patch of the image and multiplying it with the kernel.
