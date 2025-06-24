@@ -79,7 +79,8 @@
             After the images ares sampled, the convolution is applied to each of them using the function \texttt{conv2d(...)} defined in 2.1.b.
             Finally, the convolved images are plotted.
         \end{enumerate}
-        \item Image Feature Computation
+        \item Image Feature Computation:
+        The implementation of this task was pretty straight forward. As we already get a grayscaled image, we can just flatten the array to receive the grayscaled values. To get the gradients, we rely on the Prewitt kernels created before as well as the convolution function. The magnitude of the gradients are then given by the absolute values of the result. With \texttt{np.meshgrid} we then create a grid of the original image's shape. Lastly, we stack all of the results vertically to get the feature matrix as requested by the task description.
     \end{enumerate}
 
     \item Classification and Feature Selection
@@ -104,6 +105,12 @@
             The U-Net without augmentation achieves a Dice Score of 0.079, a Precision of 0.041, and a Recall of 1.0.
         \end{enumerate}
         \item Shape Particle Filters
+        \begin{enumerate}[label=\alph*)]
+            \item First we need to define a cost function, based on a given shape model as well as a classification. The function we have chosen is rather straightforward, which may explain the arguably poor results obtained and plotted in Task 3.4b). We compute the euclidean distance of each classified segmentation to the nearest pixel identified by the shape model. We then return the average of these distances as cost.\\
+            In \texttt{fit\_shape\_model}, we then aim at optimizing based on this cost function. To do that, all we really have to do is define the bounds for that optimization process, and the rest will be done for us by the \texttt{optimize} function that was supplied to us.\\
+            For parameter \texttt{b}, we allow up to three standard deviations of variance for each component. \texttt{scale} we allow in the bounds of 0.5 to 2 as a means of resizing of the shape.  For rotation, we allow in between -Pi and Pi Radians. Then for translations we allow half the image up or downwards in both directions.
+            \item TODO: Describe results
+        \end{enumerate}
     \end{enumerate}
 \end{enumerate}
 
