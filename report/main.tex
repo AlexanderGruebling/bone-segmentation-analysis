@@ -88,12 +88,15 @@
         \item Data preparation
         \begin{enumerate}[label=\alph*)]
             \item Splitting the image dataset of 50 images with its corresponding masks where 30 images \texttt{(I\_train)}  and \texttt{masks (y\_train)} use for training. The rest of them are used for testing the Random Forest algorithm. The test images and their masks denote \texttt{I\_test} and \texttt{y\_test}, respectively.
-
+        \end{enumerate}
+        \item Random Forest (RF)
+        \begin{enumerate}[label=\alph*)]
             \item \texttt{RandomForestClassifier} uses from \texttt{sklearn} module. The parameters are \texttt{n\_estimators}, \texttt{max\_features}, \texttt{class\_weight}, \texttt{n\_jobs}, \texttt{oob\_score}, and \texttt{random\_state}. n\_estimators are the number of trees, in the \texttt{Random Forest} algorithm, 100 trees are used for better performance and accuracy.
             To reduce the overfitting and ensuring the diversity of the trees, max\_features parameters are set to \texttt{"sqrt"}. To automatically adjust the weights of the target variable, \texttt{class\_weight} set to "balanced" and utilizing multiple CPU cores of local machine, n\_jobs set to -1. To estimate the generalization accuracy - Out\-of\-bag samples are used, hence \texttt{oob\_score} set to "True". Better oob\_score means the model will perform better with the unseen data. lastly, random\_state ensures the reproducibility of results. \texttt{clf.fit(X\_train\_flat, y\_train\_flat)} trains over the samples and features. 
             \item The Random Forest Algorithm trains on 36,598 pixels with 7 features. Since the out\-of\-bag score calculates validation accuracy of unused samples during training - therefore, 0.939 score means the model will perform well with the random data.
+            \item The Random Forest Classifier has Dice score 0.23, precision 0.13, and Recall of 0.79. The dice score suggested that the segmentation is very weak. because of the severe class imbalance what could be seen from confusion matrix and shallow feature set, makes it hard for the trees to learn.  
         \end{enumerate}
-        \item Random Forest (RF)
+        
         \item U-Net
         \begin{enumerate}[label=\alph*)]
             \item Train U-Net
@@ -119,7 +122,8 @@
             \item First we need to define a cost function, based on a given shape model as well as a classification. The function we have chosen is rather straightforward, which may explain the arguably poor results obtained and plotted in Task 3.4b). We compute the euclidean distance of each classified segmentation to the nearest pixel identified by the shape model. We then return the average of these distances as cost.\\
             In \texttt{fit\_shape\_model}, we then aim at optimizing based on this cost function. To do that, all we really have to do is define the bounds for that optimization process, and the rest will be done for us by the \texttt{optimize} function that was supplied to us.\\
             For parameter \texttt{b}, we allow up to three standard deviations of variance for each component. \texttt{scale} we allow in the bounds of 0.5 to 2 as a means of resizing of the shape.  For rotation, we allow in between -Pi and Pi Radians. Then for translations we allow half the image up or downwards in both directions.
-            \item TODO: Describe results
+            \item The green lines are the ground-truth contour and the red dotted line is the predicted mask which is derivated by the Random-Forest algorithm. The pipeline performs well where the cortices are thick and high-contrast as the forest heavily depends on the raw density. But the model struggles in the thin cortext and bone overlaps, noisy background is another issue.
+            Bright soft-tissue  and overlapping bones also created false-positive pixels which creates misplaced or rotated masks. Class balances and feature engineering will improve the random forest classifier. Iterative shape fitting can also improve the precision and dice score simultaneously. 
         \end{enumerate}
     \end{enumerate}
 \end{enumerate}
