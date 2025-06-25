@@ -101,8 +101,18 @@
             \item Now we use the U-Net to predict the segmentation masks for the test images.
             To do so, we first need to create a dataset and a dataloader for the test images, because the U-Net expects the images to be in a specific shape, that the dataloader automatically produces.
             In order to plot the predicted masks, we need to convert them back to numpy arrays and use the \texttt{plot\_prediction\_triplets(...)} function with the input images, the predicted masks, and the ground truth masks.
-            \item For the random forest, we achieve a Dice Score of 0.236, a Precision of 0.139, and a Recall of 0.794.
-            The U-Net without augmentation achieves a Dice Score of 0.079, a Precision of 0.041, and a Recall of 1.0.
+            \item For the random forest, we achieve a Dice Score of 0.231, a Precision of 0.135, and a Recall of 0.794.
+            The U-Net without augmentation achieves a Dice Score of 0.11, a Precision of 0.059, and a Recall of 0.99.
+            When the U-Net is trained with augmentation, it achieves a Dice Score of 0.028, a Precision of 0.014, and a Recall of 1.0.
+            \\
+            The Random Forest preforms significantly better than both U-Net models.
+            The main problem with the U-Net is probably the small dataset size, which is not enough to train a deep learning model like U-Net.
+            Especially for the not augmented U-Net, we see overfitting, as the models loss stays constant or even goes up, starting with epoch 40.
+            However, the Train Loss is still decreasing.
+            The augmentation does also not help in this case.
+            \\
+            However, the results that are plotted in Task 3.3c) show that the U-Net is able to learn some features of the segmentation masks, as it is able to predict some of the masks correctly.
+            Regarding that, I do not really understand why the recall is that high.
         \end{enumerate}
         \item Shape Particle Filters
         \begin{enumerate}[label=\alph*)]
