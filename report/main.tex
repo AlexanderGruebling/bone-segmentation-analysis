@@ -59,9 +59,10 @@
     \begin{enumerate}[label=\theenumi.\arabic*.]
         \item Simple \texttt{plt.imshow} together with \texttt{plt.scatter}
         \item Same as 1.1., but the aligned landmarks are centered around \((0, 0)\).
-        \item We only need to add the rotation matrix, which is very simple in 2D. In order to apply the rotation matrix,
+        \item The scale factor can just be applied to the normal data shape, as it's uniform for all axes.
+        We then need to add the rotation matrix, which is very simple in 2D. In order to apply the rotation matrix,
         we also need to reshape from \([x_1, \ldots , x_N, y_1, \ldots, y_N]\) to \([[x_1, \ldots, x_N], [y_1, \ldots, y_N]]\), then apply
-        the rotation matrix, and finally reshape the data back.
+        the rotation matrix. Lastly, we just need to add the translation to the result and reshape it back to the original shape.
         \item We used the PCA module of sklearn.
         I tested the methods with angles and translations of which I knew how the output should look like and it was ok,
         so the final output with our calculated transformations should also be correct.
@@ -99,8 +100,35 @@
         
         \item U-Net
         \begin{enumerate}[label=\alph*)]
-            \item Train U-Net
-            \item Interpret U-Net
+            \item We can see that the loss function for the unaugmented U-Net looks quite bad.
+            The validation and training loss decrease until around epoch 40.
+            Afterwards, only the training loss decreases while the validation loss increases, which means the model is overfitting to the training data and cannot generalise well.
+            For the augmented U-Net, both the training and validation loss steadily decrease until the end of the training.
+            This is because the data augmentation introduces random transforms, such as flipping the image, changing brightness/contrast, or elastic transform, which means that the U-Net will not overfit like before.\\
+            \begin{minipage}{\linewidth}
+                \centering
+                \begin{minipage}{0.5\linewidth}
+                    \includegraphics[width=\linewidth]{unet_loss}
+                    \captionof{figure}{Unaugmented U-Net Loss}
+                    \label{fig:unet_loss}
+                \end{minipage}%
+                \begin{minipage}{0.5\linewidth}
+                    \includegraphics[width=\linewidth]{unet_augmented_loss}
+                    \captionof{figure}{Augmented U-Net Loss}
+                    \label{fig:unet_augmented_loss}
+                \end{minipage}
+            \end{minipage}
+            \item It looks like channel 2 learned to detect edges of the image.
+            Channel 0 and 7 look quite similar, like a greyscale version of the input image, while channel 1 and 3 look pretty much just like the input.
+            This could indicate that these channels are used to capture general information of the input image.
+            Channel 4, 5, and 6 all look very dark and almost inverted from the input image, which could indicate that they are used to learn something from the background brightness.
+            Especially in channel 5 we can see the middle top part of the middle bone, so it might learn to extract the shape of the top part of the middle bone. \\
+            \begin{minipage}{\linewidth}
+                \centering
+                \includegraphics[width=\linewidth]{unet_layers}
+                \captionof{figure}{U-Net first layer outputs}
+                \label{fig:unet_layers}
+            \end{minipage}
             \item Now we use the U-Net to predict the segmentation masks for the test images.
             To do so, we first need to create a dataset and a dataloader for the test images, because the U-Net expects the images to be in a specific shape, that the dataloader automatically produces.
             In order to plot the predicted masks, we need to convert them back to numpy arrays and use the \texttt{plot\_prediction\_triplets(...)} function with the input images, the predicted masks, and the ground truth masks.
